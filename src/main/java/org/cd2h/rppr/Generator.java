@@ -59,6 +59,7 @@ public class Generator extends BodyTagSupport {
     };
 
     static Modes mode = Modes.BODY;
+    static boolean showBudget = false;
 
     static Pattern projectPattern = Pattern.compile("^\\* \\[([^\\]]+)\\]\\(([^ \\)]+)\\)( +\\(\\[([^\\]]+)\\]\\(([^ \\)]+)\\)\\))?$");
     static List<List<Object>> sheet = null;
@@ -67,7 +68,8 @@ public class Generator extends BodyTagSupport {
 	PropertyConfigurator.configure(args[0]);
 	initialize();
 
-	loadBudgetSheet();
+	if (showBudget)
+	    loadBudgetSheet();
 	pandocBridge(generate("admin"));
 	pandocBridge(generate("informatics-maturity"));
 	pandocBridge(generate("next-gen-data-sharing"));
@@ -104,7 +106,8 @@ public class Generator extends BodyTagSupport {
     public int doStartTag() {
 	try {
 	    initialize();
-	    loadBudgetSheet();
+	    if (showBudget)
+		loadBudgetSheet();
 	    pageContext.getOut().print(pandocBridge(generate(coreName)));
 	} catch (Exception e) {
 	    logger.error("Exception raised: ", e);
@@ -318,11 +321,17 @@ public class Generator extends BodyTagSupport {
     }
 
     static void generateCoreBudget(String core, StringBuffer buffer) throws ParseException {
-	buffer.append(coreBudget(core)+"\n");
+	if (showBudget)
+	    buffer.append(coreBudget(core)+"\n");
+	else
+	    buffer.append("suppressed until final release\n");
     }
 
     static void generateProjectBudget(String project, StringBuffer buffer) throws ParseException {
-	buffer.append(projectBudget(project)+"\n");
+	if (showBudget)
+	    buffer.append(projectBudget(project)+"\n");
+	else
+	    buffer.append("suppressed until final release\n");
     }
 
     static void generateProject(String reference, StringBuffer buffer) throws IOException, ParseException {
