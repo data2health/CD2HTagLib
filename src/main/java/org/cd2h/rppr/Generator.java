@@ -344,7 +344,7 @@ public class Generator extends BodyTagSupport {
 	    String rppr_url = matcher.group(5);
 	    logger.debug("project: " + title + " : " + url);
 	    logger.debug("\tRPPR: " + rppr_title + " : " + rppr_url);
-	    buffer.append("#### " + title + "\n");
+	    buffer.append("\n\n --- \n #### " + title + "\n --- \n\n");
 	    if (rppr_title == null) {
 		buffer.append("No RPPR link for project.\n");
 	    } else {
