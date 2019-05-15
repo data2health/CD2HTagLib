@@ -67,14 +67,15 @@ public class Generator extends BodyTagSupport {
     public static void main(String[] args) throws IOException, GeneralSecurityException, ParseException, SQLException, ClassNotFoundException {
 	PropertyConfigurator.configure(args[0]);
 	initialize();
-
+	showBudget = true; // presumably running on command line to generate docx
+	
 	if (showBudget)
 	    loadBudgetSheet();
-	pandocBridge(generate("admin"));
-	pandocBridge(generate("informatics-maturity"));
-	pandocBridge(generate("next-gen-data-sharing"));
-	pandocBridge(generate("resource-discovery"));
-	pandocBridge(generate("software-cloud-infrastructure"));
+	System.out.print(generate("admin"));
+	System.out.print(generate("informatics-maturity"));
+	System.out.print(generate("next-gen-data-sharing"));
+	System.out.print(generate("resource-discovery"));
+	System.out.print(generate("software-cloud-infrastructure"));
     }
     
     static void initialize() throws ClassNotFoundException, SQLException {
@@ -132,12 +133,12 @@ public class Generator extends BodyTagSupport {
 		.build();
 	
 	sheet = service.spreadsheets().values().get(spreadsheetId, range).execute().getValues();
-	logger.info("response: " + sheet);
-	logger.info("value: " + sheet.get(2).get(11));
-	logger.info("value: " + projectBudget("engagement"));
-	logger.info("value: " + projectBudget("operational-architecture"));
-	logger.info("value: " + projectBudget("idea-challenge"));
-	logger.info("value: " + coreBudget("Admin"));
+	logger.debug("response: " + sheet);
+	logger.debug("value: " + sheet.get(2).get(11));
+	logger.debug("value: " + projectBudget("engagement"));
+	logger.debug("value: " + projectBudget("operational-architecture"));
+	logger.debug("value: " + projectBudget("idea-challenge"));
+	logger.debug("value: " + coreBudget("Admin"));
 
     }
     
@@ -234,7 +235,7 @@ public class Generator extends BodyTagSupport {
 	while ((current = reader.readLine()) != null) {
 	    switch (mode) {
 	    case BODY:
-		logger.info("current: " + current);
+		logger.debug("current: " + current);
 		buffer.append(current + "\n");
 		switch (current) {
 		case "# Other Core Members":
@@ -256,7 +257,7 @@ public class Generator extends BodyTagSupport {
 		    reader.reset();
 		    mode = Modes.BODY;
 		} else
-		    logger.info("\tskipping: " + current);
+		    logger.debug("\tskipping: " + current);
 		break;
 	    case BUDGET:
 		if (current.startsWith("#")) {
@@ -264,7 +265,7 @@ public class Generator extends BodyTagSupport {
 		    reader.reset();
 		    mode = Modes.BODY;
 		} else
-		    logger.info("\tskipping: " + current);
+		    logger.debug("\tskipping: " + current);
 		break;
 	    case PROJECT:
 		if (current.startsWith("#")) {
@@ -274,7 +275,7 @@ public class Generator extends BodyTagSupport {
 		} else if (current.startsWith("*")) {
 		    generateProject(current, buffer);
 		} else {
-		    logger.info("current: " + current);
+		    logger.debug("current: " + current);
 		    buffer.append(current + "\n");
 		}
 		break;
@@ -341,14 +342,14 @@ public class Generator extends BodyTagSupport {
 	    String url = matcher.group(2);
 	    String rppr_title = matcher.group(4);
 	    String rppr_url = matcher.group(5);
-	    logger.info("project: " + title + " : " + url);
-	    logger.info("\tRPPR: " + rppr_title + " : " + rppr_url);
+	    logger.debug("project: " + title + " : " + url);
+	    logger.debug("\tRPPR: " + rppr_title + " : " + rppr_url);
 	    buffer.append("#### " + title + "\n");
 	    if (rppr_title == null) {
 		buffer.append("No RPPR link for project.\n");
 	    } else {
 		String rppr = fetch(rppr_url.replaceFirst("github.com/", "api.github.com/repos/").replaceFirst("blob/master", "contents"));
-		logger.info("RPPR: " + rppr);
+		logger.debug("RPPR: " + rppr);
 		BufferedReader reader = new BufferedReader(new StringReader(rppr));
 		String current = null;
 		reader.mark(200);
@@ -356,7 +357,7 @@ public class Generator extends BodyTagSupport {
 		while ((current = reader.readLine()) != null) {
 		    switch (projectMode) {
 		    case BODY:
-			logger.info("current: " + current);
+			logger.debug("current: " + current);
 			buffer.append((current.length() > 0 && current.charAt(0) == '#' ? "####" : "") + current + "\n");
 			switch (current) {
 			case "# Budget":
@@ -371,7 +372,7 @@ public class Generator extends BodyTagSupport {
 			    reader.reset();
 			    projectMode = Modes.BODY;
 			} else
-			    logger.info("\tskipping: " + current);
+			    logger.debug("\tskipping: " + current);
 			break;
 		    default:
 			break;
@@ -402,7 +403,7 @@ public class Generator extends BodyTagSupport {
 	}
 	if (content != null)
 	    content = content.replace('\u0000', ' ');
-	logger.info("readme: " + content);
+	logger.debug("readme: " + content);
 	return content;
     }
 
@@ -414,7 +415,7 @@ public class Generator extends BodyTagSupport {
 	StringBuffer result = new StringBuffer();
 
 	try {
-	    logger.info("spawning pandoc process...");
+	    logger.debug("spawning pandoc process...");
 	    // spawn child process
 	    Process lgProcess = Runtime.getRuntime().exec("/usr/local/bin/pandoc -f gfm -t html");
 
@@ -426,7 +427,7 @@ public class Generator extends BodyTagSupport {
 	    String buffer = null;
 	    while ((buffer = from.readLine()) != null) {
 		result.append(buffer + "\n");
-		logger.info(buffer);
+		logger.debug(buffer);
 	    }
 	    from.close();
 	} catch (Exception e) {
