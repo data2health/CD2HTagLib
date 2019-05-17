@@ -12,6 +12,7 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.util.Base64;
@@ -53,7 +54,8 @@ public class Generator extends BodyTagSupport {
     static JsonFactory JSON_FACTORY = JacksonFactory.getDefaultInstance();
 
     static Decoder decoder = Base64.getMimeDecoder();
- 
+    static DecimalFormat formatter = new DecimalFormat("###,###,###"); 
+    
     static enum Modes {
 	BODY, MEMBERS, BUDGET, PROJECT
     };
@@ -323,14 +325,14 @@ public class Generator extends BodyTagSupport {
 
     static void generateCoreBudget(String core, StringBuffer buffer) throws ParseException {
 	if (showBudget)
-	    buffer.append(coreBudget(core)+"\n");
+	    buffer.append("$"+formatter.format(coreBudget(core))+"\n");
 	else
 	    buffer.append("suppressed until final release\n");
     }
 
     static void generateProjectBudget(String project, StringBuffer buffer) throws ParseException {
 	if (showBudget)
-	    buffer.append(projectBudget(project)+"\n");
+	    buffer.append("$"+formatter.format(projectBudget(project))+"\n");
 	else
 	    buffer.append("suppressed until final release\n");
     }
