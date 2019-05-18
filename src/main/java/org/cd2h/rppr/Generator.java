@@ -64,6 +64,7 @@ public class Generator extends BodyTagSupport {
     static boolean showBudget = false;
 
     static Pattern projectPattern = Pattern.compile("^\\* \\[([^\\]]+)\\]\\(([^ \\)]+)\\)( +\\(\\[([^\\]]+)\\]\\(([^ \\)]+)\\)\\))?$");
+    static Pattern imagePattern = Pattern.compile("^ *!\\[([^\\]]*)\\]\\(([^\\)]+)\\)(.*)$");
     static List<List<Object>> sheet = null;
 
     public static void main(String[] args) throws IOException, GeneralSecurityException, ParseException, SQLException, ClassNotFoundException {
@@ -77,7 +78,7 @@ public class Generator extends BodyTagSupport {
 	System.out.print(generate("informatics-maturity"));
 	System.out.print(generate("next-gen-data-sharing"));
 	System.out.print(generate("resource-discovery"));
-	System.out.print(generate("software-cloud-infrastructure"));
+	System.out.print(generate("tools-cloud-infrastructure"));
     }
     
     static void initialize() throws ClassNotFoundException, SQLException {
@@ -129,82 +130,79 @@ public class Generator extends BodyTagSupport {
     static void loadBudgetSheet() throws GeneralSecurityException, IOException, ParseException {
 	final NetHttpTransport HTTP_TRANSPORT = GoogleNetHttpTransport.newTrustedTransport();
 	final String spreadsheetId = google_prop_file.getProperty("budget.spreadsheetId");
-	final String range = "fromKen!A1:M34";
+	final String range = "forRPPR!A1:M63";
 	Sheets service = new Sheets.Builder(HTTP_TRANSPORT, JSON_FACTORY, GoogleAPI.getCredentials(HTTP_TRANSPORT, SCOPES, google_prop_file.getProperty("sheets.credentials"), google_prop_file.getProperty("sheets.tokens")))
 		.setApplicationName(APPLICATION_NAME)
 		.build();
 	
 	sheet = service.spreadsheets().values().get(spreadsheetId, range).execute().getValues();
 	logger.debug("response: " + sheet);
-	logger.debug("value: " + sheet.get(2).get(11));
-	logger.debug("value: " + projectBudget("engagement"));
-	logger.debug("value: " + projectBudget("operational-architecture"));
-	logger.debug("value: " + projectBudget("idea-challenge"));
-	logger.debug("value: " + coreBudget("Admin"));
-
     }
     
     static int projectBudget(String label) throws ParseException {
 	String stringValue = null;
 	switch (label) {
 	case "engagement":
-	    stringValue = (String) sheet.get(2).get(11);
+	    stringValue = (String) sheet.get(3).get(12);
 	    break;
-	case "operational-architecture":
-	    stringValue = (String) sheet.get(3).get(11);
+	case "Operational-architecture":
+	    stringValue = (String) sheet.get(4).get(12);
 	    break;
 	case "idea-challenge":
-	    stringValue = (String) sheet.get(4).get(11);
+	    stringValue = (String) sheet.get(5).get(12);
 	    break;
 	case "governance-pathways":
-	    stringValue = (String) sheet.get(5).get(11);
+	    stringValue = (String) sheet.get(6).get(12);
 	    break;
-	case "reusable-data":
-	    stringValue = (String) sheet.get(6).get(11);
+	case "rdp-portal":
+	    stringValue = (String) sheet.get(8).get(12);
 	    break;
 	case "maturity-model":
-	    stringValue = (String) sheet.get(7).get(11);
+	    stringValue = (String) sheet.get(7).get(12);
 	    break;
 	case "data-harmonization":
-	    stringValue = (String) sheet.get(8).get(11);
+	    stringValue = (String) sheet.get(9).get(12);
 	    break;
-	case "loinc2hpo":
-	    stringValue = (String) sheet.get(9).get(11);
+	case "ehr2HPO.prj":
+	    stringValue = (String) sheet.get(11).get(12);
 	    break;
-	case "hot-fhir":
-	    stringValue = (String) sheet.get(10).get(11);
+	case "hot-fhir-projects":
+	    stringValue = (String) sheet.get(10).get(12);
 	    break;
 	case "architecting_attribution":
-	    stringValue = (String) sheet.get(11).get(11);
+	    stringValue = (String) sheet.get(12).get(12);
 	    break;
 	case "edu-harmonization":
-	    stringValue = (String) sheet.get(12).get(11);
+	    stringValue = (String) sheet.get(13).get(12);
 	    break;
 	case "information-architecture":
-	    stringValue = (String) sheet.get(13).get(11);
+	    stringValue = (String) sheet.get(14).get(12);
 	    break;
 	case "menRva":
-	    stringValue = (String) sheet.get(14).get(11);
+	    stringValue = (String) sheet.get(15).get(12);
 	    break;
 	case "CTS-Personas":
-	    stringValue = (String) sheet.get(15).get(11);
+	    stringValue = "0"; //(String) sheet.get(15).get(12);
 	    break;
 	case "scits-platform":
-	    stringValue = (String) sheet.get(16).get(11);
+	    stringValue = (String) sheet.get(16).get(12);
 	    break;
-	case "cloud-tool-architecture":
-	    stringValue = (String) sheet.get(17).get(11);
+	case "Cloud-Tool-Architecture":
+	case "Cloud-Tool-Archtecture":
+	    stringValue = (String) sheet.get(17).get(12);
 	    break;
 	case "leaf-edw":
-	    stringValue = (String) sheet.get(18).get(11);
+	    stringValue = (String) sheet.get(18).get(12);
 	    break;
+	case "DREAM-Challenge":
 	case "mortality-prediction":
-	    stringValue = (String) sheet.get(19).get(11);
+	    stringValue = (String) sheet.get(19).get(12);
 	    break;
-	case "peer-review":
-	    stringValue = (String) sheet.get(20).get(11);
+	case "competitions-project":
+	    stringValue = (String) sheet.get(20).get(12);
 	    break;
 	default:
+	    System.err.println("unmatched project name: " + label);
 	    stringValue =  "-1";
 	}
 	return NumberFormat.getNumberInstance(java.util.Locale.US).parse(stringValue).intValue();
@@ -213,17 +211,18 @@ public class Generator extends BodyTagSupport {
     static int coreBudget(String label) throws ParseException {
 	switch (label) {
 	case "admin":
-	    return projectBudget("engagement")+projectBudget("operational-architecture")+projectBudget("idea-challenge");
+	    return projectBudget("engagement")+projectBudget("Operational-architecture")+projectBudget("idea-challenge");
 	case "informatics-maturity":
-	    return projectBudget("governance-pathways")+projectBudget("reusable-data")+projectBudget("maturity-model");
+	    return projectBudget("governance-pathways")+projectBudget("rdp-portal")+projectBudget("maturity-model");
 	case "next-gen-data-sharing":
-	    return projectBudget("data-harmonization")+projectBudget("loinc2hpo")+projectBudget("hot-fhir");
+	    return projectBudget("data-harmonization")+projectBudget("ehr2HPO.prj")+projectBudget("hot-fhir-projects");
 	case "resource-discovery":
-	    return projectBudget("architecting-attribution")+projectBudget("educational-harmonization")+projectBudget("information-architecture")
-	    		+ projectBudget("menRva")+projectBudget("personas")+projectBudget("science-of-translational-science-platform");
-	case "software-cloud-infrastructure":
-	    return projectBudget("cloud-tool-architecture")+projectBudget("leaf-edw")+projectBudget("mortality-prediction")+projectBudget("peer-review");
+	    return projectBudget("architecting_attribution")+projectBudget("edu-harmonization")+projectBudget("information-architecture")
+	    		+ projectBudget("menRva")+projectBudget("CTS-Personas")+projectBudget("scits-platform");
+	case "tools-cloud-infrastructure":
+	    return projectBudget("Cloud-Tool-Archtecture")+projectBudget("leaf-edw")+projectBudget("competitions-project")+projectBudget("DREAM-Challenge");
 	default:
+	    System.err.println("unmatched core name: " + label);
 	    return -1;
 	}
     }
@@ -304,7 +303,7 @@ public class Generator extends BodyTagSupport {
 	case "resource-discovery":
 	    core_id = 4;
 	    break;
-	case "software-cloud-infrastructure":
+	case "tools-cloud-infrastructure":
 	    core_id = 5;
 	    break;
 	}
@@ -342,6 +341,7 @@ public class Generator extends BodyTagSupport {
 	if (matcher.matches()) {
 	    String title = matcher.group(1);
 	    String url = matcher.group(2);
+	    String repo_name = url.substring(url.lastIndexOf("/")+1);
 	    String rppr_title = matcher.group(4);
 	    String rppr_url = matcher.group(5);
 	    logger.debug("project: " + title + " : " + url);
@@ -360,7 +360,24 @@ public class Generator extends BodyTagSupport {
 		    switch (projectMode) {
 		    case BODY:
 			logger.debug("current: " + current);
-			buffer.append((current.length() > 0 && current.charAt(0) == '#' ? "####" : "") + current + "\n");
+			
+			if (current.contains("!"))
+			    System.err.println("matched image instance: " + current);
+
+			Matcher imageMatcher = imagePattern.matcher(current);
+			if (imageMatcher.matches()) {
+			    String anchor = imageMatcher.group(1);
+			    String currentImage = imageMatcher.group(2);
+			    if (!currentImage.startsWith("http"))
+				currentImage = "https://raw.githubusercontent.com/data2health/" + repo_name + "/master/" + currentImage;
+			    String trailer = imageMatcher.group(3);
+			    System.err.println("matched image anchor: " + anchor);
+			    System.err.println("matched image instance: " + currentImage);
+			    System.err.println("matched image trailer: " + trailer);
+			    buffer.append("![" + anchor + "](" + currentImage + ")" + trailer + "\n");
+			} else
+			    buffer.append((current.length() > 0 && current.charAt(0) == '#' ? "####" : "") + current + "\n");
+			
 			switch (current) {
 			case "# Budget":
 			    projectMode = Modes.BUDGET;
