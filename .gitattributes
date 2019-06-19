@@ -9,6 +9,9 @@
 .settings/org.maven.ide.eclipse.prefs -text
 /pom.xml -text svneol=unset#application/xml
 src/main/java/org/cd2h/rppr/Generator.java -text
+src/main/java/org/cd2h/services/Loader.java -text
+src/main/java/org/cd2h/services/LocalProperties.java -text
+src/main/java/org/cd2h/services/PropertyLoader.java -text
 src/main/resources/META-INF/taglib.tld -text svneol=unset#application/xml
 src/non-packaged-resources/Model.clay -text svneol=unset#application/xml
 src/test/java/org/cd2h/README.txt -text
