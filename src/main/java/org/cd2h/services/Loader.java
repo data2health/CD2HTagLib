@@ -25,8 +25,8 @@ public class Loader {
     static Pattern linePattern = Pattern.compile("^( *\\* )?(.*)$");
     
     static String hub = null;
-    static String[] slot = new String[5];
-    static int[] indent = new int[5];
+    static String[] slot = new String[6];
+    static int[] indent = new int[6];
 
     public static void main(String[] args) throws ClassNotFoundException, SQLException, IOException {
 	PropertyConfigurator.configure(args[0]);
@@ -40,12 +40,18 @@ public class Loader {
     
     static void processHub(File hubFile) throws IOException, SQLException {
 	hub =  hubFile.getName();
+	if (hub.endsWith(".docx.txt"))
+	    hub = hub.substring(0, hub.length()-9);
+	else if (hub.endsWith(".txt"))
+	    hub = hub.substring(0, hub.length()-4);
 	logger.info("hub: " + hub);
 
 	PreparedStatement stmt = conn.prepareStatement("delete from ctsa_services.facet_base where hub=?");
 	stmt.setString(1, hub);
 	stmt.execute();
 	stmt.close();
+	
+	mode = MODE.PREFIX;
 
 	BufferedReader theReader = new BufferedReader(new FileReader(hubFile));
 	String buffer = null;
@@ -63,6 +69,8 @@ public class Loader {
 		}
 		break;
 	    case BODY:
+		if (buffer.trim().length() == 0)
+		    break;
 		processLine(buffer);
 		break;
 	    }
@@ -90,20 +98,21 @@ public class Loader {
 	    logger.debug("\tfence: " + fence + "\tindent: " + Arrays.toString(indent));
 	    logger.info("\t\tslot: " + Arrays.toString(slot));
 	    
-	    PreparedStatement stmt = conn.prepareStatement("insert into ctsa_services.facet_base(hub,slot0,slot1,slot2,slot3,slot4) values(?,?,?,?,?,?)");
+	    PreparedStatement stmt = conn.prepareStatement("insert into ctsa_services.facet_base(hub,slot0,slot1,slot2,slot3,slot4,slot5) values(?,?,?,?,?,?,?)");
 	    stmt.setString(1, hub);
 	    stmt.setString(2, slot[0]);
 	    stmt.setString(3, slot[1]);
 	    stmt.setString(4, slot[2]);
 	    stmt.setString(5, slot[3]);
 	    stmt.setString(6, slot[4]);
+	    stmt.setString(7, slot[5]);
 	    stmt.execute();
 	    stmt.close();
 	}
     }
     
     static void clear(int index) {
-	for (int i = index; i <= 4; i++) {
+	for (int i = index; i <= 5; i++) {
 	    slot[i] = null;
 	    indent[i] = 0;
 	}
