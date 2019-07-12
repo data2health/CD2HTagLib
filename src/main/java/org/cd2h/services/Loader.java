@@ -32,7 +32,7 @@ public class Loader {
 	PropertyConfigurator.configure(args[0]);
 	conn = getConnection();
 
-	File root = new File("/Users/eichmann/ctsa_services");
+	File root = new File("/Users/eichmann/ctsa_services2");
 	for (File hub : root.listFiles()) {
 	    processHub(hub);
 	}
@@ -89,9 +89,15 @@ public class Loader {
 	    logger.debug("\tindent: " + currentIndent + "\t" + content);
 	    
 	    int fence = 1;
-	    while (currentIndent > 0 && indent[fence] > 0 && indent[fence] < currentIndent) {
+	    while (currentIndent > 0 && fence < 6 && indent[fence] > 0 && indent[fence] < currentIndent) {
 		fence++;
 	    }
+	    
+	    if (fence >= 6) {
+		logger.error("*** nesting is too deep! ***");
+		return;
+	    }
+	    
 	    clear(fence);
 	    indent[fence] = currentIndent;
 	    slot[currentIndent == 0 ? 0 : fence] = content;
