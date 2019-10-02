@@ -84,7 +84,7 @@ public class Generator extends BodyTagSupport {
 	System.out.print(generate("tools-cloud-infrastructure"));
     }
     
-    static void initialize() throws ClassNotFoundException, SQLException {
+    static public void initialize() throws ClassNotFoundException, SQLException {
 	google_prop_file = PropertyLoader.loadProperties("google");
 	prop_file = PropertyLoader.loadProperties("github");
 	client_id = prop_file.getProperty("client_id");
@@ -504,6 +504,10 @@ public class Generator extends BodyTagSupport {
 		}
 	    }
 	}
+    }
+
+    public static String fetch(String owner, String repoName, String fileName) {
+	return fetch("https://api.github.com/repos/" + owner + "/" + repoName + "/contents/" + fileName);
     }
 
     public static String fetch(String repoName, String fileName) {
