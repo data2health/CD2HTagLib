@@ -17,6 +17,7 @@ src/main/java/org/cd2h/toolRegistry/Harvester.java -text
 src/main/resources/META-INF/taglib.tld -text svneol=unset#application/xml
 src/non-packaged-resources/Model.clay -text svneol=unset#application/xml
 src/non-packaged-resources/covid.sql -text
+src/non-packaged-resources/n3c_trials.sql -text
 src/non-packaged-resources/temp.sql -text
 src/test/java/org/cd2h/README.txt -text
 src/test/resources/README.txt -text
