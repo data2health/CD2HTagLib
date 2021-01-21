@@ -9,6 +9,7 @@
 .settings/org.maven.ide.eclipse.prefs -text
 /pom.xml -text svneol=unset#application/xml
 src/main/java/org/cd2h/clic/HubHarvester.java -text
+src/main/java/org/cd2h/incommon/Loader.java -text
 src/main/java/org/cd2h/rppr/Generator.java -text
 src/main/java/org/cd2h/services/Loader.java -text
 src/main/java/org/cd2h/services/LocalProperties.java -text
