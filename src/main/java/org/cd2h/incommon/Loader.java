@@ -1,23 +1,19 @@
 package org.cd2h.incommon;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStream;
-import java.io.InputStreamReader;
+import java.io.*;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.text.DecimalFormat;
 import java.util.Properties;
+import javax.xml.parsers.*;
 
+import edu.uiowa.util.PropertyLoader;
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
 import org.w3c.dom.*;
-import javax.xml.parsers.*;
-import java.io.*;
-import edu.uiowa.util.PropertyLoader;
 
 public class Loader {
 	static Logger logger = Logger.getLogger(Loader.class);
@@ -29,6 +25,8 @@ public class Loader {
 	public static void main(String[] args) throws Exception {
 		PropertyConfigurator.configure(args[0]);
 		conn = getConnection();
+		
+		conn.prepareStatement("truncate incommon.organization").execute();
 
 	    URL theURL = new URL("https://mdq.incommon.org/entities/idps/all");
 		InputStream in = theURL.openConnection().getInputStream();
@@ -41,17 +39,31 @@ public class Loader {
 		NodeList nList = doc.getElementsByTagName("EntityDescriptor");
 		for (int temp = 0; temp < nList.getLength(); temp++) {
             Element node = (Element) nList.item(temp);
-            logger.trace("entry: " +  node);
+            logger.trace("entry: " +  asString(node));
+            String entityID = node.getAttribute("entityID");
+            logger.info("entityID: " + entityID);
             Node org = node.getElementsByTagName("Organization").item(0);
-            logger.info("org: "  + org.getNodeValue());
+            logger.debug("org: "  + asString((Element)org));
             String name = getElementString((Element)org, "OrganizationName");
             logger.info("\tname: " + name);
             String displayname = getElementString((Element)org, "OrganizationDisplayName");
             logger.info("\tdisplayname: " + displayname);
             String url = getElementString((Element)org, "OrganizationURL");
             logger.info("\turl: " + url);
+            
+            PreparedStatement stmt = conn.prepareStatement("insert into incommon.organization values(?,?,?,?)");
+            stmt.setString(1, entityID);
+            stmt.setString(2, name);
+            stmt.setString(3, displayname);
+            stmt.setString(4, url);
+            stmt.execute();
+            stmt.close();
 		}
 		in.close();
+	}
+	
+	static String asString(Element element) {
+		return ((org.w3c.dom.ls.DOMImplementationLS)element.getOwnerDocument().getImplementation()).createLSSerializer().writeToString(element);
 	}
 	
 	static String getElementString(Element node, String element)  {
@@ -92,7 +104,7 @@ public class Loader {
 			props.setProperty("ssl", "true");
 		}
 		conn = DriverManager.getConnection(db_url, props);
-		conn.setAutoCommit(false);
+		conn.setAutoCommit(true);
 
 		return conn;
 	}
