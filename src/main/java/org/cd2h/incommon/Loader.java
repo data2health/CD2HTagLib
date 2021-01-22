@@ -14,10 +14,9 @@ import java.util.Properties;
 
 import org.apache.log4j.Logger;
 import org.apache.log4j.PropertyConfigurator;
-import org.dom4j.Document;
-import org.dom4j.Element;
-import org.dom4j.io.SAXReader;
-
+import org.w3c.dom.*;
+import javax.xml.parsers.*;
+import java.io.*;
 import edu.uiowa.util.PropertyLoader;
 
 public class Loader {
@@ -31,14 +30,41 @@ public class Loader {
 		PropertyConfigurator.configure(args[0]);
 		conn = getConnection();
 
-	    URL theURL = new URL("https://mdq.incommon.org/entities");
+	    URL theURL = new URL("https://mdq.incommon.org/entities/idps/all");
 		InputStream in = theURL.openConnection().getInputStream();
-		SAXReader reader = new SAXReader(false);
-
-		Document document = reader.read(in);
-		Element root = document.getRootElement();
-		logger.debug("document root: " + root.getName());
+		DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+		DocumentBuilder builder = factory.newDocumentBuilder();
+		Document doc = builder.parse(in);
+		Element root = doc.getDocumentElement();
+		root.normalize();
+		logger.info("document root: " + doc.getDocumentElement().getNodeName());
+		NodeList nList = doc.getElementsByTagName("EntityDescriptor");
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+            Element node = (Element) nList.item(temp);
+            logger.trace("entry: " +  node);
+            Node org = node.getElementsByTagName("Organization").item(0);
+            logger.info("org: "  + org.getNodeValue());
+            String name = getElementString((Element)org, "OrganizationName");
+            logger.info("\tname: " + name);
+            String displayname = getElementString((Element)org, "OrganizationDisplayName");
+            logger.info("\tdisplayname: " + displayname);
+            String url = getElementString((Element)org, "OrganizationURL");
+            logger.info("\turl: " + url);
+		}
 		in.close();
+	}
+	
+	static String getElementString(Element node, String element)  {
+		NodeList nList = node.getElementsByTagName(element);
+		for (int temp = 0; temp < nList.getLength(); temp++) {
+            Element child = (Element) nList.item(temp);
+            logger.debug("lang: " +  child.getAttribute("xml:lang"));
+            if (child.getAttribute("xml:lang").equals("en"))  {
+                logger.debug("\tnode: " +  child.toString());
+            	return child.getTextContent();
+            }
+		}
+		return  null;
 	}
 
 	static Connection getConnection() throws ClassNotFoundException, SQLException {
