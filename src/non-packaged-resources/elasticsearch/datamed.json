@@ -1,0 +1,11 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-datamed",
+		"nodes": {
+			"table": "raw_jsonb",
+			"schema": "datamed",
+			"columns": []
+		}
+	}
+]

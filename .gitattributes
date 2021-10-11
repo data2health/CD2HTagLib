@@ -21,6 +21,8 @@ src/non-packaged-resources/Model.clay -text svneol=unset#application/xml
 src/non-packaged-resources/cd2h_search_test.json -text
 src/non-packaged-resources/covid.sql -text
 src/non-packaged-resources/elasticsearch/clinical_trials.json -text
+src/non-packaged-resources/elasticsearch/datamed.json -text
+src/non-packaged-resources/elasticsearch/sparc_musc.json -text
 src/non-packaged-resources/n3c_trials.sql -text
 src/non-packaged-resources/temp.sql -text
 src/test/java/org/cd2h/README.txt -text
