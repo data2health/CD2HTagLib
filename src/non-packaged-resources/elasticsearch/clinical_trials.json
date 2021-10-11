@@ -1,0 +1,74 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-clinical-trials",
+		"plugins": [],
+		"nodes": {
+			"table": "study",
+			"schema": "clinical_trials",
+			"columns": [
+				"nct_id",
+				"brief_title",
+				"official_title",
+				"overall_status",
+				"study_type"
+			],
+			"children": [
+				{
+					"table": "overall_official",
+					"schema": "clinical_trials",
+					"columns": [
+						"overall_official_name",
+						"overall_official_affiliation"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "collaborator",
+					"schema": "clinical_trials",
+					"columns": [],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "keyword",
+					"schema": "clinical_trials",
+					"columns": [
+						"keyword"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "phase",
+					"schema": "clinical_trials",
+					"columns": [
+						"phase"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "condition",
+					"schema": "clinical_trials",
+					"columns": [
+						"condition"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				}
+			]
+		}
+	}
+]

@@ -1,0 +1,48 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-demographics",
+		"plugins": [],
+		"nodes": {
+			"table": "person",
+			"schema": "demographics",
+			"columns": [],
+			"children": [
+				{
+					"table": "department",
+					"schema": "demographics",
+					"columns": [],
+					"label": "department",
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many",
+						"through_tables": [
+							"appointment"
+						]
+					}
+				}
+			]
+		}
+	},
+	{
+		"database": "cd2h",
+		"index": "cd2h-investigator",
+		"plugins": [],
+		"nodes": {
+			"table": "investigator",
+			"schema": "loki",
+			"columns": [],
+			"children": [
+				{
+					"table": "research",
+					"schema": "loki",
+					"columns": [],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_one"
+					}
+				}
+			]
+		}
+	}
+]
