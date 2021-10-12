@@ -68,7 +68,17 @@
 						"type": "one_to_many"
 					}
 				}
-			]
+			],
+			"transform": {
+				"rename": {
+					"brief_title": "label"
+				},
+				"concat": {
+                    "columns": [ "'http://'", "nct_id"],
+                    "destination": "url"
+                }
+				
+			}
 		}
 	}
 ]
