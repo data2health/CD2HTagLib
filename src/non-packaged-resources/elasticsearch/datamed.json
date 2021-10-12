@@ -5,7 +5,17 @@
 		"nodes": {
 			"table": "raw_jsonb",
 			"schema": "datamed",
-			"columns": []
+			"columns": [
+				"raw->_source->access->landingPage",
+				"raw->_source->dataset->title",
+				"raw"
+			],
+			"transform": {
+				"rename": {
+					"raw__source_access_landingPage": "url",
+					"raw__source_dataset_title": "label"
+				}
+			}
 		}
 	}
 ]

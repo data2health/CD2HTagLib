@@ -18,7 +18,7 @@
 					"raw_direct_link": "url"
 				},
 				"concat": {
-                    "columns": [ "'http://'", "url"],
+                    "columns": [ "'http://'", "id"],
                     "destination": "full_url"
                 }
 				
