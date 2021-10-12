@@ -1,0 +1,50 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-nih-foa",
+		"plugins": [],
+		"nodes": {
+			"table": "guide_doc",
+			"schema": "nih_foa",
+			"columns": [
+				"id",
+				"title",
+				"purpose",
+				"primary_ic",
+				"doc_num",
+				"guide_link"
+			],
+			"children": [
+				{
+					"table": "content",
+					"schema": "nih_foa",
+					"columns": [
+						"html"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_one"
+					}
+				},
+				{
+					"table": "activity_code",
+					"schema": "nih_foa",
+					"columns": [
+						"code"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				}
+			],
+			"transform": {
+				"rename": {
+					"title": "label",
+					"guide_link": "url"
+                }
+				
+			}
+		}
+	}
+]

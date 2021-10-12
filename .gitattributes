@@ -22,6 +22,7 @@ src/non-packaged-resources/cd2h_search_test.json -text
 src/non-packaged-resources/covid.sql -text
 src/non-packaged-resources/elasticsearch/clinical-trials.json -text
 src/non-packaged-resources/elasticsearch/datamed.json -text
+src/non-packaged-resources/elasticsearch/nih-foa.json -text
 src/non-packaged-resources/elasticsearch/sparc-musc.json -text
 src/non-packaged-resources/n3c_trials.sql -text
 src/non-packaged-resources/temp.sql -text
