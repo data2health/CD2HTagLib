@@ -1,0 +1,45 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-diamond-training-material",
+		"plugins": [],
+		"nodes": {
+			"table": "training_material",
+			"schema": "diamond",
+			"columns": [],
+			"children": [
+				{
+					"table": "training_material_author",
+					"schema": "diamond",
+					"columns": [
+						"author"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "training_material_competency",
+					"schema": "diamond",
+					"columns": [
+						"domain"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				}
+			],
+			"transform": {
+				"rename": {
+					"title": "label"
+ 				},
+				"concat": {
+                    "columns": [ "https://diamondportal.org/trainings/", "id"],
+                    "destination": "url"
+                }
+			}
+		}
+	}
+]

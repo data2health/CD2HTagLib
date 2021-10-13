@@ -1,0 +1,45 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-diamond-assessment",
+		"plugins": [],
+		"nodes": {
+			"table": "assessment",
+			"schema": "diamond",
+			"columns": [],
+			"children": [
+				{
+					"table": "assessment_author",
+					"schema": "diamond",
+					"columns": [
+						"author"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "assessment_competency",
+					"schema": "diamond",
+					"columns": [
+						"domain"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				}
+			],
+			"transform": {
+				"rename": {
+					"title": "label"
+				},
+				"concat": {
+                    "columns": [ "https://diamondportal.org/assessments/", "id"],
+                    "destination": "url"
+                }
+			}
+		}
+	}
+]

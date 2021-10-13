@@ -1,0 +1,21 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-datacite",
+		"nodes": {
+			"table": "raw_jsonb",
+			"schema": "datacite",
+			"columns": [
+				"id",
+				"raw->attributes->title",
+				"raw"
+			],
+			"transform": {
+				"rename": {
+					"id": "url",
+					"raw_attributes_title": "label"
+				}
+			}
+		}
+	}
+]

@@ -1,0 +1,21 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-redcap",
+		"plugins": [],
+		"nodes": {
+			"table": "library_instrument",
+			"schema": "redcap",
+			"columns": [],
+			"transform": {
+				"rename": {
+					"instrument_title": "label"
+                },
+				"concat": {
+                    "columns": [ "'http://'", "id"],
+                    "destination": "url"
+                }
+			}
+		}
+	}
+]

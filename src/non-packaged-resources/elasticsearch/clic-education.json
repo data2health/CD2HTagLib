@@ -1,0 +1,62 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-clic-education",
+		"plugins": [],
+		"nodes": {
+			"table": "resource",
+			"schema": "clic",
+			"columns": [
+				"id",
+				"url",
+				"title",
+				"description",
+				"objective",
+				"institution",
+				"method",
+				"frequency",
+				"fee"
+			],
+			"children": [
+				{
+					"table": "competency",
+					"schema": "clic",
+					"columns": [
+						"competency"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "tag",
+					"schema": "clic",
+					"columns": [
+						"tag"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "target",
+					"schema": "clic",
+					"columns": [
+						"target"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				}
+			],
+			"transform": {
+				"rename": {
+					"title": "label"
+                }
+			}
+		}
+	}
+]
