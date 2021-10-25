@@ -1,0 +1,114 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-profile-vivo",
+		"plugins": [],
+		"nodes": {
+			"table": "person",
+			"schema": "vivo_elastic",
+			"columns": [],
+			"children": [
+				{
+					"table": "site",
+					"schema": "vivo_elastic",
+					"columns": [],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_one"
+					}
+				},
+				{
+					"table": "person_keyword",
+					"schema": "vivo_elastic",
+					"columns": [
+						"keyword"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "person_research_area",
+					"schema": "vivo_elastic",
+					"columns": [
+						"research_area"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "person_research_overview",
+					"schema": "vivo_elastic",
+					"columns": [
+						"overview"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_one"
+					}
+				},
+				{
+					"table": "academic_article",
+					"schema": "vivo_elastic",
+					"columns": [],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many",
+						"through_tables": [
+							"authorship"
+						]
+					},
+					"children": [
+						{
+							"table": "academic_article_abstract",
+							"schema": "vivo_elastic",
+							"columns": [
+								"abstract"
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_one"
+							}
+						},
+						{
+							"table": "academic_article_keyword",
+							"schema": "vivo_elastic",
+							"columns": [
+								"keyword"
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_many"
+							}
+						},
+						{
+							"table": "academic_article_publication_venue",
+							"schema": "vivo_elastic",
+							"columns": [
+								"venue"
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_many"
+							}
+						},
+						{
+							"table": "academic_article_subject_area",
+							"schema": "vivo_elastic",
+							"columns": [
+								"subject_area"
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_many"
+							}
+						}
+					]
+				}
+			]
+		}
+	}
+]

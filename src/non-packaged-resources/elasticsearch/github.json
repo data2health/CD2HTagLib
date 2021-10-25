@@ -1,0 +1,104 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-github-user",
+		"plugins": [],
+		"nodes": {
+			"table": "user_raw",
+			"schema": "github",
+			"columns": [
+				"id",
+				"login",
+				"raw->url",
+				"raw"
+			],
+			"children": [
+				{
+					"table": "repo_raw",
+					"schema": "github",
+					"columns": [],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many",
+						"through_tables": [
+							"user_repo"
+						]
+					}
+				}
+			],
+			"transform": {
+				"rename": {
+					"login": "label",
+					"raw_url": "url"
+                }
+            }
+		}
+	},
+	{
+		"database": "cd2h",
+		"index": "cd2h-github-organization",
+		"plugins": [],
+		"nodes": {
+			"table": "org_raw",
+			"schema": "github",
+			"columns": [
+				"id",
+				"login",
+				"raw->url",
+				"raw"
+			],
+			"children": [
+				{
+					"table": "repo_raw",
+					"schema": "github",
+					"columns": [],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many",
+						"through_tables": [
+							"org_repo"
+						]
+					}
+				}
+			],
+			"transform": {
+				"rename": {
+					"login": "label",
+					"raw_url": "url"
+                }
+            }
+		}
+	},
+	{
+		"database": "cd2h",
+		"index": "cd2h-github-repository",
+		"plugins": [],
+		"nodes": {
+			"table": "repo_raw",
+			"schema": "github",
+			"columns": [
+				"id",
+				"raw->full_name",
+				"raw->html_url",
+				"raw"
+			],
+			"children": [
+				{
+					"table": "readme",
+					"schema": "github",
+					"columns": [],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				}
+			],
+			"transform": {
+				"rename": {
+					"raw_full_name": "label",
+					"raw_html_url": "url"
+                }
+            }
+		}
+	}
+]

@@ -26,10 +26,15 @@ src/non-packaged-resources/elasticsearch/datacite.json -text
 src/non-packaged-resources/elasticsearch/datamed.json -text
 src/non-packaged-resources/elasticsearch/diamond-assessment.json -text
 src/non-packaged-resources/elasticsearch/diamond-training-material.json -text
+src/non-packaged-resources/elasticsearch/elasticsearch_support.sql -text
+src/non-packaged-resources/elasticsearch/github.json -text
 src/non-packaged-resources/elasticsearch/nih-foa.json -text
 src/non-packaged-resources/elasticsearch/redcap.json -text
 src/non-packaged-resources/elasticsearch/sparc-musc.json -text
+src/non-packaged-resources/elasticsearch/vivo.json -text
+src/non-packaged-resources/github_elasticsearch.sql -text
 src/non-packaged-resources/n3c_trials.sql -text
 src/non-packaged-resources/temp.sql -text
+src/non-packaged-resources/vivo_elastic.sql -text
 src/test/java/org/cd2h/README.txt -text
 src/test/resources/README.txt -text
