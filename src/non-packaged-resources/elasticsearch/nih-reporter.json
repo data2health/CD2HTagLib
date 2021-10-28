@@ -1,0 +1,80 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-nih-reporter",
+		"plugins": [
+		],
+		"nodes": {
+			"table": "project",
+			"schema": "nih_exporter",
+			"columns": [
+			],
+			"children": [
+				{
+					"table": "funding_ic",
+					"schema": "nih_exporter",
+					"columns": [
+						"ic",
+						"funding"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "pi",
+					"schema": "nih_exporter",
+					"columns": [
+						"pi_id",
+						"pi_name"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "project_abstract",
+					"schema": "nih_exporter",
+					"columns": [
+						"abstract_text"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_one"
+					}
+				},
+				{
+					"table": "spending_category",
+					"schema": "nih_exporter",
+					"columns": [
+						"category"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "term",
+					"schema": "nih_exporter",
+					"columns": [
+						"term"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				}
+			],
+			"transform": {
+				"rename": {
+					"login": "label",
+					"raw_url": "url",
+					"abstract_text": "abstract"
+				}
+			}
+		}
+	}
+]

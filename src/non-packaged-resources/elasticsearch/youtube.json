@@ -1,0 +1,196 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-youtube-channel",
+		"plugins": [
+		],
+		"nodes": {
+			"table": "channel",
+			"schema": "youtube",
+			"columns": [
+			],
+			"children": [
+				{
+					"table": "playlist",
+					"schema": "youtube",
+					"columns": [
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					},
+					"children": [
+						{
+							"table": "video",
+							"schema": "youtube",
+							"columns": [
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_many",
+								"through_tables": [
+									"playlist_item"
+								]
+							},
+							"children": [
+								{
+									"table": "tag",
+									"schema": "youtube",
+									"columns": [
+										"tag"
+									],
+									"relationship": {
+										"variant": "object",
+										"type": "one_to_many"
+									}
+								},
+								{
+									"table": "video_thumbnail",
+									"schema": "youtube",
+									"columns": [
+										"size",
+										"url",
+										"width",
+										"height"
+									],
+									"relationship": {
+										"variant": "object",
+										"type": "one_to_many"
+									}
+								}
+							]
+						}
+					]
+				}
+			]
+		}
+	},
+	{
+		"database": "cd2h",
+		"index": "cd2h-youtube-playlist",
+		"plugins": [
+		],
+		"nodes": {
+			"table": "playlist",
+			"schema": "youtube",
+			"columns": [
+			],
+			"children": [
+				{
+					"table": "channel",
+					"schema": "youtube",
+					"columns": [
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_one"
+					}
+				},
+				{
+					"table": "video",
+					"schema": "youtube",
+					"columns": [
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many",
+						"through_tables": [
+							"playlist_item"
+						]
+					},
+					"children": [
+						{
+							"table": "tag",
+							"schema": "youtube",
+							"columns": [
+								"tag"
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_many"
+							}
+						},
+						{
+							"table": "video_thumbnail",
+							"schema": "youtube",
+							"columns": [
+								"size",
+								"url",
+								"width",
+								"height"
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_many"
+							}
+						}
+					]
+				}
+			]
+		}
+	},
+	{
+		"database": "cd2h",
+		"index": "cd2h-youtube-video",
+		"plugins": [
+		],
+		"nodes": {
+			"table": "video",
+			"schema": "youtube",
+			"columns": [
+			],
+			"children": [
+				{
+					"table": "playlist",
+					"schema": "youtube",
+					"columns": [
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many",
+						"through_tables": [
+							"playlist_item"
+						]
+					},
+					"children": [
+						{
+							"table": "channel",
+							"schema": "youtube",
+							"columns": [
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_one"
+							}
+						}
+					]
+				},
+				{
+					"table": "tag",
+					"schema": "youtube",
+					"columns": [
+						"tag"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "video_thumbnail",
+					"schema": "youtube",
+					"columns": [
+						"size",
+						"url",
+						"width",
+						"height"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				}
+			]
+		}
+	}
+]
