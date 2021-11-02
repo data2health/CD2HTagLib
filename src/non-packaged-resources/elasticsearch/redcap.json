@@ -12,7 +12,7 @@
 					"instrument_title": "label"
                 },
 				"concat": {
-                    "columns": [ "'http://'", "id"],
+                    "columns": [ "REDCap/instrument.jsp?id=", "id"],
                     "destination": "url"
                 }
 			}

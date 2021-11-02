@@ -70,9 +70,11 @@
 			],
 			"transform": {
 				"rename": {
-					"login": "label",
-					"raw_url": "url",
-					"abstract_text": "abstract"
+					"title": "label"
+                },
+				"concat": {
+                    "columns": [ "https://projectreporter.nih.gov/project_info_description.cfm?aid=", "application_id"],
+                    "destination": "url"
 				}
 			}
 		}

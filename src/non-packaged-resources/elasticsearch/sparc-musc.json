@@ -14,12 +14,11 @@
 			],
 			"transform": {
 				"rename": {
-					"raw_name": "label",
-					"raw_direct_link": "url"
+					"raw_name": "label"
 				},
 				"concat": {
-                    "columns": [ "'http://'", "id"],
-                    "destination": "full_url"
+                    "columns": [ "http://", "raw_direct_link"],
+                    "destination": "url"
                 }
 				
 			}
