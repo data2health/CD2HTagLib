@@ -62,7 +62,19 @@
 						}
 					]
 				}
-			]
+			],
+			"transform": {
+				"rename": {
+					"channel_title": "label"
+				},
+				"concat": {
+					"columns": [
+						"https://www.youtube.com/channel/",
+						"channel_id"
+					],
+					"destination": "url"
+				}
+			}
 		}
 	},
 	{
@@ -126,7 +138,19 @@
 						}
 					]
 				}
-			]
+			],
+			"transform": {
+				"rename": {
+					"title": "label"
+				},
+				"concat": {
+					"columns": [
+						"https://www.youtube.com/playlist?list=",
+						"playlist_id"
+					],
+					"destination": "url"
+				}
+			}
 		}
 	},
 	{
@@ -190,7 +214,19 @@
 						"type": "one_to_many"
 					}
 				}
-			]
+			],
+			"transform": {
+				"rename": {
+					"title": "label"
+				},
+				"concat": {
+					"columns": [
+						"https://www.youtube.com/watch?v=",
+						"video_id"
+					],
+					"destination": "url"
+				}
+			}
 		}
 	}
 ]
