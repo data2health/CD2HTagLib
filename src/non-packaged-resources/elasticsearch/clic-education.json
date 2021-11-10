@@ -55,7 +55,11 @@
 			"transform": {
 				"rename": {
 					"title": "label"
-                }
+                },
+				"concat": {
+            		"columns": [ "education"],
+            		"destination": "entity"
+            	}
 			}
 		}
 	}

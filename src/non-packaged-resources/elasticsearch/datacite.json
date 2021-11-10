@@ -14,7 +14,11 @@
 				"rename": {
 					"id": "url",
 					"raw_attributes_title": "label"
-				}
+				},
+				"concat": {
+            		"columns": [ "dataset"],
+            		"destination": "entity"
+            	}
 			}
 		}
 	}

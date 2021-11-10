@@ -14,10 +14,6 @@
 				"concat": {
                     "columns": [ "REDCap/instrument.jsp?id=", "id"],
                     "destination": "url"
-                },
-				"concat": {
-                    "columns": [ "instrument"],
-                    "destination": "entity"
                 }
 			}
 		}

@@ -30,7 +30,11 @@
 				"rename": {
 					"login": "label",
 					"raw_url": "url"
-                }
+                },
+				"concat": {
+            		"columns": [ "person"],
+            		"destination": "entity"
+            	}
             }
 		}
 	},
@@ -65,7 +69,11 @@
 				"rename": {
 					"login": "label",
 					"raw_url": "url"
-                }
+                },
+				"concat": {
+            		"columns": [ "organization"],
+            		"destination": "entity"
+            	}
             }
 		}
 	},
@@ -97,7 +105,11 @@
 				"rename": {
 					"raw_full_name": "label",
 					"raw_html_url": "url"
-                }
+                },
+				"concat": {
+            		"columns": [ "repository"],
+            		"destination": "entity"
+            	}
             }
 		}
 	}

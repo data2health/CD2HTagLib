@@ -108,7 +108,13 @@
 						}
 					]
 				}
-			]
+			],
+			"transform": {
+				"concat": {
+            		"columns": [ "person"],
+            		"destination": "entity"
+            	}
+			}
 		}
 	}
 ]

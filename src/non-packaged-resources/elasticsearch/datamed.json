@@ -14,7 +14,11 @@
 				"rename": {
 					"raw__source_access_landingPage": "url",
 					"raw__source_dataset_title": "label"
-				}
+				},
+				"concat": {
+            		"columns": [ "dataset"],
+            		"destination": "entity"
+            	}
 			}
 		}
 	}

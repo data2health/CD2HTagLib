@@ -42,8 +42,11 @@
 				"rename": {
 					"title": "label",
 					"guide_link": "url"
-                }
-				
+                },
+				"concat": {
+            		"columns": [ "funding opportunity"],
+            		"destination": "entity"
+            	}
 			}
 		}
 	}
