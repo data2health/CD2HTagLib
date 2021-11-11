@@ -2,11 +2,13 @@
 	{
 		"database": "cd2h",
 		"index": "cd2h-diamond-training-material",
-		"plugins": [],
+		"plugins": [
+		],
 		"nodes": {
 			"table": "training_material",
 			"schema": "diamond",
-			"columns": [],
+			"columns": [
+			],
 			"children": [
 				{
 					"table": "training_material_author",
@@ -34,11 +36,22 @@
 			"transform": {
 				"rename": {
 					"title": "label"
- 				},
-				"concat": {
-                    "columns": [ "https://diamondportal.org/trainings/", "id"],
-                    "destination": "url"
-                }
+				},
+				"concat": [
+					{
+						"columns": [
+							"https://diamondportal.org/trainings/",
+							"id"
+						],
+						"destination": "url"
+					},
+					{
+						"columns": [
+							"education"
+						],
+						"destination": "entity"
+					}
+				]
 			}
 		}
 	}

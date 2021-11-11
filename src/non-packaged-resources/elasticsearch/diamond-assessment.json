@@ -2,11 +2,13 @@
 	{
 		"database": "cd2h",
 		"index": "cd2h-diamond-assessment",
-		"plugins": [],
+		"plugins": [
+		],
 		"nodes": {
 			"table": "assessment",
 			"schema": "diamond",
-			"columns": [],
+			"columns": [
+			],
 			"children": [
 				{
 					"table": "assessment_author",
@@ -35,10 +37,21 @@
 				"rename": {
 					"title": "label"
 				},
-				"concat": {
-                    "columns": [ "https://diamondportal.org/assessments/", "id"],
-                    "destination": "url"
-                }
+				"concat": [
+					{
+						"columns": [
+							"https://diamondportal.org/assessments/",
+							"id"
+						],
+						"destination": "url"
+					},
+					{
+						"columns": [
+							"education"
+						],
+						"destination": "entity"
+					}
+				]
 			}
 		}
 	}

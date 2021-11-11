@@ -2,19 +2,32 @@
 	{
 		"database": "cd2h",
 		"index": "cd2h-redcap",
-		"plugins": [],
+		"plugins": [
+		],
 		"nodes": {
 			"table": "library_instrument",
 			"schema": "redcap",
-			"columns": [],
+			"columns": [
+			],
 			"transform": {
 				"rename": {
 					"instrument_title": "label"
-                },
-				"concat": {
-                    "columns": [ "REDCap/instrument.jsp?id=", "id"],
-                    "destination": "url"
-                }
+				},
+				"concat": [
+					{
+						"columns": [
+							"REDCap/instrument.jsp?id=",
+							"id"
+						],
+						"destination": "url"
+					},
+					{
+						"columns": [
+							"instrument"
+						],
+						"destination": "entity"
+					}
+				]
 			}
 		}
 	}

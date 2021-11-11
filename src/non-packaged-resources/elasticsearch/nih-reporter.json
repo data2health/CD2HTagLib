@@ -71,11 +71,22 @@
 			"transform": {
 				"rename": {
 					"title": "label"
-                },
-				"concat": {
-                    "columns": [ "https://projectreporter.nih.gov/project_info_description.cfm?aid=", "application_id"],
-                    "destination": "url"
-				}
+				},
+				"concat": [
+					{
+						"columns": [
+							"https://projectreporter.nih.gov/project_info_description.cfm?aid=",
+							"application_id"
+						],
+						"destination": "url"
+					},
+					{
+						"columns": [
+							"grant"
+						],
+						"destination": "entity"
+					}
+				]
 			}
 		}
 	}

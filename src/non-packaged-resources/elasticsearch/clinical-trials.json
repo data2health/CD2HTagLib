@@ -2,7 +2,8 @@
 	{
 		"database": "cd2h",
 		"index": "cd2h-clinical-trials",
-		"plugins": [],
+		"plugins": [
+		],
 		"nodes": {
 			"table": "study",
 			"schema": "clinical_trials",
@@ -29,7 +30,8 @@
 				{
 					"table": "collaborator",
 					"schema": "clinical_trials",
-					"columns": [],
+					"columns": [
+					],
 					"relationship": {
 						"variant": "object",
 						"type": "one_to_many"
@@ -73,11 +75,21 @@
 				"rename": {
 					"brief_title": "label"
 				},
-				"concat": {
-                    "columns": [ "https://clinicaltrials.gov/ct2/show/", "nct_id"],
-                    "destination": "url"
-                }
-				
+				"concat": [
+					{
+						"columns": [
+							"https://clinicaltrials.gov/ct2/show/",
+							"nct_id"
+						],
+						"destination": "url"
+					},
+					{
+						"columns": [
+							"clinical trial"
+						],
+						"destination": "entity"
+					}
+				]
 			}
 		}
 	}

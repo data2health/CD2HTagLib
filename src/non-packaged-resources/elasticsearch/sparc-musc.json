@@ -2,7 +2,8 @@
 	{
 		"database": "cd2h",
 		"index": "cd2h-sparc-musc",
-		"plugins": [],
+		"plugins": [
+		],
 		"nodes": {
 			"table": "service_raw",
 			"schema": "sparc_musc",
@@ -16,11 +17,21 @@
 				"rename": {
 					"raw_name": "label"
 				},
-				"concat": {
-                    "columns": [ "http://", "raw_direct_link"],
-                    "destination": "url"
-                }
-				
+				"concat": [
+					{
+						"columns": [
+							"http://",
+							"raw_direct_link"
+						],
+						"destination": "url"
+					},
+					{
+						"columns": [
+							"service"
+						],
+						"destination": "entity"
+					}
+				]
 			}
 		}
 	}
