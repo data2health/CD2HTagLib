@@ -9,7 +9,7 @@
 			"columns": [
 				"id",
 				"login",
-				"raw->url",
+				"raw->html_url",
 				"raw"
 			],
 			"children": [
@@ -29,7 +29,7 @@
 			"transform": {
 				"rename": {
 					"login": "label",
-					"raw_url": "url"
+					"raw_html_url": "url"
                 },
 				"concat": {
             		"columns": [ "person"],
@@ -48,7 +48,7 @@
 			"columns": [
 				"id",
 				"login",
-				"raw->url",
+				"raw->html_url",
 				"raw"
 			],
 			"children": [
@@ -68,7 +68,7 @@
 			"transform": {
 				"rename": {
 					"login": "label",
-					"raw_url": "url"
+					"raw_html_url": "url"
                 },
 				"concat": {
             		"columns": [ "organization"],
