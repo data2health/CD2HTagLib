@@ -43,20 +43,6 @@
 										"variant": "object",
 										"type": "one_to_many"
 									}
-								},
-								{
-									"table": "video_thumbnail",
-									"schema": "youtube",
-									"columns": [
-										"size",
-										"url",
-										"width",
-										"height"
-									],
-									"relationship": {
-										"variant": "object",
-										"type": "one_to_many"
-									}
 								}
 							]
 						}
@@ -77,7 +63,7 @@
 					},
 					{
 						"columns": [
-							"video"
+							"video clip"
 						],
 						"destination": "entity"
 					}
@@ -129,20 +115,6 @@
 								"variant": "object",
 								"type": "one_to_many"
 							}
-						},
-						{
-							"table": "video_thumbnail",
-							"schema": "youtube",
-							"columns": [
-								"size",
-								"url",
-								"width",
-								"height"
-							],
-							"relationship": {
-								"variant": "object",
-								"type": "one_to_many"
-							}
 						}
 					]
 				}
@@ -161,7 +133,7 @@
 					},
 					{
 						"columns": [
-							"video"
+							"video clip"
 						],
 						"destination": "entity"
 					}
@@ -245,7 +217,7 @@
 					},
 					{
 						"columns": [
-							"video"
+							"video clip"
 						],
 						"destination": "entity"
 					}
