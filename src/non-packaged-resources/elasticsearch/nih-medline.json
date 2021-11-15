@@ -1,0 +1,86 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-nih-medline",
+		"plugins": [
+		],
+		"nodes": {
+			"table": "article",
+			"schema": "medline",
+			"columns": [
+			],
+			"children": [
+				{
+					"table": "abstract",
+					"schema": "medline",
+					"columns": [
+						"label",
+						"abstract"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "article_id",
+					"schema": "medline",
+					"columns": [
+						"id_type",
+						"article_id"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "article_title",
+					"schema": "medline",
+					"columns": [
+						"article_title"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_one"
+					}
+				},
+				{
+					"table": "author",
+					"schema": "medline",
+					"columns": [
+						"last_name",
+						"fore_name",
+						"initials",
+						"suffix",
+						"collective_name"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				}
+			],
+			"transform": {
+				"rename": {
+					"article_title_article_title": "label"
+				},
+				"concat": [
+					{
+						"columns": [
+							"https://pubmed.ncbi.nlm.nih.gov/",
+							"pmid"
+						],
+						"destination": "url"
+					},
+					{
+						"columns": [
+							"publication"
+						],
+						"destination": "entity"
+					}
+				]
+			}
+		}
+	}
+]

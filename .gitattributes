@@ -29,6 +29,8 @@ src/non-packaged-resources/elasticsearch/diamond-training-material.json -text
 src/non-packaged-resources/elasticsearch/elasticsearch_support.sql -text
 src/non-packaged-resources/elasticsearch/github.json -text
 src/non-packaged-resources/elasticsearch/nih-foa.json -text
+src/non-packaged-resources/elasticsearch/nih-litcovid.json -text
+src/non-packaged-resources/elasticsearch/nih-medline.json -text
 src/non-packaged-resources/elasticsearch/nih-reporter.json -text
 src/non-packaged-resources/elasticsearch/redcap.json -text
 src/non-packaged-resources/elasticsearch/sparc-musc.json -text

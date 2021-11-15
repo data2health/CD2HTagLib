@@ -1,0 +1,224 @@
+[
+	{
+		"database": "cd2h",
+		"index": "cd2h-nih-litcovid",
+		"plugins": [
+		],
+		"nodes": {
+			"table": "article",
+			"schema": "medline_litcovid",
+			"columns": [
+			],
+			"children": [
+				{
+					"table": "abstract",
+					"schema": "medline_litcovid",
+					"columns": [
+						"label",
+						"abstract"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "article_id",
+					"schema": "medline_litcovid",
+					"columns": [
+						"id_type",
+						"article_id"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "article_title",
+					"schema": "medline_litcovid",
+					"columns": [
+						"article_title"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_one"
+					}
+				},
+				{
+					"table": "author",
+					"schema": "medline_litcovid",
+					"columns": [
+						"last_name",
+						"fore_name",
+						"initials",
+						"suffix",
+						"collective_name"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					},
+					"children":[
+						{
+							"table": "author_affiliation",
+							"schema": "medline_litcovid",
+							"columns": [
+								"affiliation"
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_many"
+							}
+						},
+						{
+							"table": "author_identifier",
+							"schema": "medline_litcovid",
+							"columns": [
+								"source",
+								"identifier"
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_many"
+							}
+						}
+					]
+				},
+				{
+					"table": "chemical",
+					"schema": "medline_litcovid",
+					"columns": [
+						"registry_number",
+						"substance_ui",
+						"name_of_substance"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "data_bank",
+					"schema": "medline_litcovid",
+					"columns": [
+						"data_bank_name"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "e_location_id",
+					"schema": "medline_litcovid",
+					"columns": [
+						"e_id_type",
+						"e_location_id"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "grant_info",
+					"schema": "medline_litcovid",
+					"columns": [
+						"grant_id",
+						"acronym",
+						"agency",
+						"country"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "keyword",
+					"schema": "medline_litcovid",
+					"columns": [
+						"major_topic",
+						"owner",
+						"keyword"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					}
+				},
+				{
+					"table": "medline_journal_info",
+					"schema": "medline_litcovid",
+					"columns": [
+						"country",
+						"medline_ta",
+						"nlm_unique_id",
+						"issn_linking"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_one"
+					}
+				},
+				{
+					"table": "mesh_heading",
+					"schema": "medline_litcovid",
+					"columns": [
+						"major_topic",
+						"type",
+						"ui",
+						"descriptor_name"
+					],
+					"relationship": {
+						"variant": "object",
+						"type": "one_to_many"
+					},
+					"children":[
+						{
+							"table": "mesh_qualifier",
+							"schema": "medline_litcovid",
+							"columns": [
+								"major_topic",
+								"ui",
+								"qualifier_name"
+							],
+							"relationship": {
+								"variant": "object",
+								"type": "one_to_many"
+							}
+						}
+					]
+				}
+			],
+			"transform": {
+				"rename": {
+					"title": "label"
+				},
+				"concat": [
+					{
+						"columns": [
+							"https://pubmed.ncbi.nlm.nih.gov/",
+							"pmid"
+						],
+						"destination": "url"
+					},
+					{
+						"columns": [
+							"https://pubmed.ncbi.nlm.nih.gov/",
+							"pmid"
+						],
+						"destination": "url"
+					},
+					{
+						"columns": [
+							"publication"
+						],
+						"destination": "entity"
+					}
+				]
+			}
+		}
+	}
+]
