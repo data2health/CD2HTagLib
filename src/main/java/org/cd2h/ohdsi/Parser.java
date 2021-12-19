@@ -8,9 +8,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 import java.util.Scanner;
 
-import org.apache.commons.logging.Log;
-import org.apache.commons.logging.LogFactory;
-import org.apache.log4j.PropertyConfigurator;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.cd2h.JSONTagLib.util.LocalProperties;
 import org.cd2h.JSONTagLib.util.PropertyLoader;
 import org.jsoup.Jsoup;
@@ -20,11 +19,10 @@ import org.jsoup.nodes.Element;
 public class Parser {
 	static Connection theConnection = null;
 	static LocalProperties prop_file = null;
-	protected static final Log logger = LogFactory.getLog(Parser.class);
+	static Logger logger = LogManager.getLogger(Parser.class);
 
 	@SuppressWarnings("resource")
 	public static void main(String[] args) throws ClassNotFoundException, SQLException {
-		PropertyConfigurator.configure(args[0]);
 		prop_file = PropertyLoader.loadProperties("ohdsi.properties");
 		theConnection = getConnection();
 		
