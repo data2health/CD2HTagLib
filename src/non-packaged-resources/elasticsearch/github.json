@@ -28,14 +28,24 @@
 			],
 			"transform": {
 				"rename": {
-					"login": "label",
+					"login": "name",
 					"raw_html_url": "url"
                 },
-				"concat": {
-            		"columns": [ "person"],
-            		"destination": "entity"
-            	}
-            }
+				"concat": [
+					{
+						"columns": [
+							"Person"
+						],
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Profile"
+						],
+						"destination": "resourceTypeName"
+					}
+            	]
+           }
 		}
 	},
 	{
@@ -67,13 +77,23 @@
 			],
 			"transform": {
 				"rename": {
-					"login": "label",
+					"login": "name",
 					"raw_html_url": "url"
                 },
-				"concat": {
-            		"columns": [ "organization"],
-            		"destination": "entity"
-            	}
+				"concat": [
+					{
+						"columns": [
+							"Organization"
+						],
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Institution"
+						],
+						"destination": "resourceTypeName"
+					}
+            	]
             }
 		}
 	},
@@ -103,13 +123,23 @@
 			],
 			"transform": {
 				"rename": {
-					"raw_full_name": "label",
+					"raw_full_name": "name",
 					"raw_html_url": "url"
                 },
-				"concat": {
-            		"columns": [ "repository"],
-            		"destination": "entity"
-            	}
+				"concat": [
+					{
+						"columns": [
+							"Collection"
+						],
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Repository"
+						],
+						"destination": "resourceTypeName"
+					}
+            	]
             }
 		}
 	}

@@ -110,10 +110,23 @@
 				}
 			],
 			"transform": {
-				"concat": {
-            		"columns": [ "person"],
-            		"destination": "entity"
-            	}
+				"rename": {
+					"label": "name"
+				},
+				"concat": [
+					{
+						"columns": [
+							"Person"
+						],
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Profile"
+						],
+						"destination": "resourceTypeName"
+					}
+				]
 			}
 		}
 	}

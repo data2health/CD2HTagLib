@@ -35,7 +35,7 @@
 			],
 			"transform": {
 				"rename": {
-					"title": "label"
+					"title": "name"
 				},
 				"concat": [
 					{
@@ -47,9 +47,15 @@
 					},
 					{
 						"columns": [
-							"education"
+							"LearningResource"
 						],
-						"destination": "entity"
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Education Resource"
+						],
+						"destination": "resourceTypeName"
 					}
 				]
 			}

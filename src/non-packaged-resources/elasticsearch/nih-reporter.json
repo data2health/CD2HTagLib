@@ -70,7 +70,7 @@
 			],
 			"transform": {
 				"rename": {
-					"title": "label"
+					"title": "name"
 				},
 				"concat": [
 					{
@@ -82,9 +82,15 @@
 					},
 					{
 						"columns": [
-							"grant"
+							"MonetaryGrant"
 						],
-						"destination": "entity"
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Grant"
+						],
+						"destination": "resourceTypeName"
 					}
 				]
 			}

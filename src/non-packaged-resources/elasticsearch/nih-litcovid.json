@@ -194,7 +194,7 @@
 			],
 			"transform": {
 				"rename": {
-					"title": "label"
+					"title": "name"
 				},
 				"concat": [
 					{
@@ -213,9 +213,15 @@
 					},
 					{
 						"columns": [
-							"publication"
+							"Publication"
 						],
-						"destination": "entity"
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Publication"
+						],
+						"destination": "resourceTypeName"
 					}
 				]
 			}

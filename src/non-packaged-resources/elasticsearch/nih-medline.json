@@ -63,7 +63,7 @@
 			],
 			"transform": {
 				"rename": {
-					"article_title_article_title": "label"
+					"article_title_article_title": "name"
 				},
 				"concat": [
 					{
@@ -75,9 +75,15 @@
 					},
 					{
 						"columns": [
-							"publication"
+							"Publication"
 						],
-						"destination": "entity"
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Publication"
+						],
+						"destination": "resourceTypeName"
 					}
 				]
 			}

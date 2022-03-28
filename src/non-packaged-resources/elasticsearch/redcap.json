@@ -11,7 +11,7 @@
 			],
 			"transform": {
 				"rename": {
-					"instrument_title": "label"
+					"instrument_title": "name"
 				},
 				"concat": [
 					{
@@ -23,9 +23,15 @@
 					},
 					{
 						"columns": [
-							"instrument"
+							"Protocol"
 						],
-						"destination": "entity"
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Research Instrument"
+						],
+						"destination": "resourceTypeName"
 					}
 				]
 			}

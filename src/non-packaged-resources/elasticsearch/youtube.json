@@ -51,7 +51,7 @@
 			],
 			"transform": {
 				"rename": {
-					"channel_title": "label"
+					"channel_title": "name"
 				},
 				"concat": [
 					{
@@ -63,9 +63,15 @@
 					},
 					{
 						"columns": [
-							"video clip"
+							"MediaObject"
 						],
-						"destination": "entity"
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Video Channel"
+						],
+						"destination": "resourceTypeName"
 					}
 				]
 			}
@@ -121,7 +127,7 @@
 			],
 			"transform": {
 				"rename": {
-					"title": "label"
+					"title": "name"
 				},
 				"concat": [
 					{
@@ -133,9 +139,15 @@
 					},
 					{
 						"columns": [
-							"video clip"
+							"MediaObject"
 						],
-						"destination": "entity"
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Video Playlist"
+						],
+						"destination": "resourceTypeName"
 					}
 				]
 			}
@@ -205,7 +217,7 @@
 			],
 			"transform": {
 				"rename": {
-					"title": "label"
+					"title": "name"
 				},
 				"concat": [
 					{
@@ -217,9 +229,15 @@
 					},
 					{
 						"columns": [
-							"video clip"
+							"MediaObject"
 						],
-						"destination": "entity"
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Video"
+						],
+						"destination": "resourceTypeName"
 					}
 				]
 			}

@@ -73,7 +73,7 @@
 			],
 			"transform": {
 				"rename": {
-					"brief_title": "label"
+					"brief_title": "name"
 				},
 				"concat": [
 					{
@@ -85,9 +85,15 @@
 					},
 					{
 						"columns": [
-							"clinical trial"
+							"ClinicalTrial"
 						],
-						"destination": "entity"
+						"destination": "@type"
+					},
+					{
+						"columns": [
+							"Clinical Trial"
+						],
+						"destination": "resourceTypeName"
 					}
 				]
 			}
